@@ -55,7 +55,7 @@ class LLRB: public Tree<TKey, TValue> {
             // If both left and right child color is RED then perform a color
             // flip.
             if (h->left && h->left->color == RED && 
-                    h->right && h->right->color == RED)
+                h->right && h->right->color == RED)
                 color_flip(h);
 
             // Go down the left subtree.
@@ -68,7 +68,7 @@ class LLRB: public Tree<TKey, TValue> {
                 h = rotate_left(h);
 
             if (h->left->color == RED && 
-                    h->left->left && h->left->left->color == RED)
+                h->left->left && h->left->left->color == RED)
                 h = rotate_right(h);
 
             return h;
