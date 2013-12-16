@@ -43,32 +43,32 @@ class Tree {
     protected:
         // A node in the tree.
         struct TreeNode {
-        	TKey key;
+            TKey key;
             TValue value;
-        	bool color;
-        	TreeNode * left;
-        	TreeNode * right;
-        	TreeNode * parent;
-        	TreeNode() {
-        	    left = NULL;
-        	    right = NULL;
-        	    parent = NULL;
-        	    color = BLACK;
+            bool color;
+            TreeNode * left;
+            TreeNode * right;
+            TreeNode * parent;
+            TreeNode() {
+                left = NULL;
+                right = NULL;
+                parent = NULL;
+                color = BLACK;
             };
-        	TreeNode(TKey key, TValue value) {
-        	    left = NULL;
-        	    right = NULL;
-        	    parent = NULL;
-        	    color = BLACK;
-        	    this->key = key;
+            TreeNode(TKey key, TValue value) {
+                left = NULL;
+                right = NULL;
+                parent = NULL;
+                color = BLACK;
+                this->key = key;
                 this->value = value;
             };
-        	TreeNode(TKey key, TValue value, bool color) {
-        	    left = NULL;
-        	    right = NULL;
-        	    parent = NULL;
-        	    this->color = color;
-        	    this->key = key;
+            TreeNode(TKey key, TValue value, bool color) {
+                left = NULL;
+                right = NULL;
+                parent = NULL;
+                this->color = color;
+                this->key = key;
                 this->value = value;
             }
         };
@@ -88,11 +88,11 @@ class Tree {
         // Linear time, O(n).
         std::string inorder_tree_walk(TreeNode * x) {
             std::ostringstream os;
-	        if (x) {
-	        	os << inorder_tree_walk(x->left);
+            if (x) {
+                os << inorder_tree_walk(x->left);
                 os << to_string(x->key) + ": " + to_string(x->value) << std::endl;
-	        	os << inorder_tree_walk(x->right);
-	        }
+                os << inorder_tree_walk(x->right);
+            }
             return os.str();
         };
 
@@ -105,12 +105,12 @@ class Tree {
 
         TValue recursive_tree_search(TreeNode * x, TKey k) {
             if (x && x->key == k)
-        		return x->value;
+                return x->value;
 
-        	if (k < x->key)
-        		return recursive_tree_search(x->left, k);
-        	else
-        		return recursive_tree_search(x->right, k);
+            if (k < x->key)
+                return recursive_tree_search(x->left, k);
+            else
+                return recursive_tree_search(x->right, k);
         }
 
         // Searches (iteratively) for a specific key in the subtree of x.
@@ -118,12 +118,12 @@ class Tree {
         // Adapted from Cormen et. al., section 12.2
         TValue iterative_tree_search(TKey k) {
             TreeNode * x = this->root;
-        	while (x && x->key != k) {
-        		if (k < x->key)
-        			x = x->left;
-        		else
-        			x = x->right;
-        	}
+            while (x && x->key != k) {
+                if (k < x->key)
+                    x = x->left;
+                else
+                    x = x->right;
+            }
             if (x)
                 return x->value;
         };
@@ -132,35 +132,35 @@ class Tree {
         // number of steps it takes to get there.
         int count_steps(TKey k) {
             TreeNode * x = this->root;
-        	int result = 0;
-        	while (x && x->key != k) {
-        		result++;
-        		if (k < x->key)
-        			x = x->left;
-        		else
-        			x = x->right;
-        	}
-        	if (x && x->key == k)
-        		return result+1;
-        	return -1;
+            int result = 0;
+            while (x && x->key != k) {
+                result++;
+                if (k < x->key)
+                    x = x->left;
+                else
+                    x = x->right;
+            }
+            if (x && x->key == k)
+                return result+1;
+            return -1;
         };
 
         // Find the minimum key in the tree
         // Adapted from Cormen, section 12.2
         TKey tree_minimum() {
             TreeNode * x = this->root;
-        	while (x->left != NULL)
-        		x = x->left;
-        	return x->key;
+            while (x->left != NULL)
+                x = x->left;
+            return x->key;
         }
-        
+
         // Find the maximum key in the tree
         // Adapted from Cormen, section 12.2
         TKey tree_maximum() {
             TreeNode * x = this->root;
-        	while (x->right != NULL)
-        		x = x->right;
-        	return x->key;
+            while (x->right != NULL)
+                x = x->right;
+            return x->key;
         }
 
         // Finds the height of the tree.
