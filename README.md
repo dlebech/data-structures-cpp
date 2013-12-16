@@ -13,6 +13,16 @@ Data structures
  * Red-black tree
  * Left-leaning red-black tree
 
+Testing
+-------
+
+There are probably a few errors and mishaps in the code and there is no real
+test suite included. Just a short program that tries out the different
+features. Maybe this will change in the future. Who knows.
+
+    g++ test.cpp -o test
+    ./test
+
 Permissions
 -----------
 
