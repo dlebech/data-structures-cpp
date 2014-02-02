@@ -1,19 +1,127 @@
-// Test all the tree implementations.
+// Test all the data structures.
+// Yes, this is turning into a big file :-)
 
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <cmath>
 #include <cassert>
+#include <cstdlib>
+#include <ctime>
 
 #include "trees/bst.h"
 #include "trees/rb.h"
 #include "trees/llrb.h"
+#include "lists/linked_list.h"
+#include "heaps/heap.h"
 
 using namespace std;
 
+void test_lists();
+void test_trees();
+void test_heaps();
+
 int main() {
-    // Create expected output for out mini-tree.
+    test_trees();
+    test_lists();
+    test_heaps();
+};
+
+void test_heaps() {
+    cout << "---- Testing Heap ----" << endl;
+    long the_heap[] = { 4, 1, 2, 3, 5 };
+    Heap<long> heap(the_heap, 5, 5);
+
+    // Test unsorted list
+    cout << "Testing unsorted list" << endl;
+    ostringstream os;
+    os << "4" << endl;
+    os << "1" << endl;
+    os << "2" << endl;
+    os << "3" << endl;
+    os << "5" << endl;
+    string expected = os.str();
+    string actual = heap.printHeap();
+    assert (actual == expected);
+    cout << "Ok" << endl;
+
+    // Test heap sort.
+    cout << "Testing heap sort" << endl;
+    os.str("");
+    os.clear();
+    os << "1" << endl;
+    os << "2" << endl;
+    os << "3" << endl;
+    os << "4" << endl;
+    os << "5" << endl;
+    heap.heapSort();
+    expected = os.str();
+    actual = heap.printHeap();
+    assert (actual == expected);
+    cout << "Ok" << endl;
+
+    int sizes[] = { 100000, 200000, 300000 };
+
+    for (int j = 0; j < 3; j++) {
+        long size = sizes[j];
+        long big_heap[size];
+        for (long i = 0; i < size; i++)
+            big_heap[i] = rand();
+        heap = * new Heap<long>(big_heap, size, size);
+        clock_t start = clock();
+        heap.heapSort();
+        clock_t end = clock();
+	    double time = (double) (end-start) / CLOCKS_PER_SEC * 1000.0;
+        cout << size << " elements: " << time << endl;
+    }
+};
+
+void test_lists() {
+    cout << "---- Testing Linked List ----" << endl;
+    LinkedList<int> ll;
+
+    // Test empty list
+    ostringstream os;
+    string expected = os.str();
+    string actual = ll.printList();
+    assert (actual == expected);
+
+    // Test list with three element.
+    ll.insert(1);
+    ll.insert(3);
+    ll.insert(2);
+
+    os << "1" << endl;
+    os << "3" << endl;
+    os << "2" << endl;
+
+    expected = os.str();
+    actual = ll.printList();
+    assert (actual == expected);
+
+    // Test removal of element that does not exist.
+    // Expected value is unchanged.
+    ll.remove(4);
+    actual = ll.printList();
+    assert (actual == expected);
+
+    // Test removal of element that does exist.
+    ll.remove(3);
+    os.str("");
+    os.clear();
+    os << "1" << endl;
+    os << "2" << endl;
+    expected = os.str();
+    actual = ll.printList();
+    assert (actual == expected);
+
+    cout << "Linked lists OK" << endl;
+};
+
+void test_trees() {
+    cout << "---- Testing trees ----" << endl;
+
+    // Create expected output for our mini-tree.
     ostringstream os;
     os << "1: first" << endl;
     os << "2: second" << endl;
@@ -207,4 +315,4 @@ int main() {
     assert (height <= max_height);
 
     cout << "LLRB OK" << endl;
-}
+};

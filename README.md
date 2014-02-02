@@ -12,6 +12,9 @@ Data structures
  * Binary search tree (BST)
  * Red-black tree
  * Left-leaning red-black tree
+* Lists and arrays
+ * Linked List
+ * Heap & heap-sort
 
 Testing
 -------

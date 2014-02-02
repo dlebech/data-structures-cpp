@@ -26,16 +26,10 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include "../util.h"
 
 const bool RED = true;
 const bool BLACK = false;
-
-template<typename T>
-std::string to_string(T value) {
-    std::ostringstream os;
-    os << value;
-    return os.str();
-}
 
 // An abstract tree implementation.
 template<class TKey, class TValue>
