@@ -30,7 +30,7 @@ Permissions
 -----------
 
 All the code in this repository has been written from scratch by [David
-Volquartz Lebech](https://davidlebech.dk) and is released with permission from
+Volquartz Lebech](http://davidlebech.com) and is released with permission from
 the University of Oregon and the course supervisor [Christopher
 Wilson](http://ix.cs.uoregon.edu/~cwilson/).
 
